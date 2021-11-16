@@ -5,9 +5,11 @@ import { createProject } from './main'
 function parseArgumentsIntoOptions (rawArgs) {
     const args = arg(
         {
+            '--help': Boolean,
             '--git' : Boolean,
             '--yes': Boolean,
             '--install': Boolean,
+            '-h': '--help',
             '-g': '--git',
             '-y': '--yes',
             '-i': '--install'
@@ -17,6 +19,7 @@ function parseArgumentsIntoOptions (rawArgs) {
         }
     )
     return {
+        help: args['--help'] || false,
         skipPrompts: args['--yes'] || false,
         git: args['--git'] || false,
         template: args._[0],
@@ -25,6 +28,20 @@ function parseArgumentsIntoOptions (rawArgs) {
 }
 
 async function promptForMissingOptions (options) {
+    if (options.help) {
+        const args = [
+            `Templates: JavaScript, TypeScript`,
+            `--help (-h): Duh. How'd you get here dummy?`,
+            `--yes (-y): Skip prompts. Defaults to JavaScript template.`,
+            `--git (-g): Initalizes a git repository`,
+            `--install (-i): Install npm dependencies`
+        ]
+        console.log('\nThis automatically bootstraps a project based on provided templates.\n\n---ARGUMENTS---')
+        args.forEach(command => console.log(command))
+        console.log('\nExample: create-project TypeScript -g -i')
+        process.exit(1)
+    }
+    
     const defaultTemplate = 'JavaScript'
     if (options.skipPrompts) {
         return {
