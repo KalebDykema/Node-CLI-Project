@@ -1,15 +1,27 @@
 {
-  "name": "cli-project",
+  "name": "@kalebdykema/create-project",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A test CLI to bootstrap a project",
+  "main": "src/index.js",
+  "bin": {
+    "@kalebdykema/create-project": "bin/create-project",
+    "create-project": "bin/create-project"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "cli",
+    "create-project"
+  ],
+  "author": "Kaleb Dykema",
+  "license": "MIT",
   "dependencies": {
-    "esm": "^3.2.25"
+    "arg": "^5.0.1",
+    "esm": "^3.2.25",
+    "inquirer": "^8.2.0"
   }
 }
