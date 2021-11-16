@@ -43,7 +43,7 @@ export async function createProject(options) {
     try {
         await access(templateDir, fs.constants.R_OK)
     } catch (err) {
-        console.log('%s Invalid template name', chalk.red.bold('ERROR'))
+        console.log('%s Invalid template name', chalk.bgRed.bold('ERROR'))
         process.exit(1)
     }
 
@@ -71,6 +71,6 @@ export async function createProject(options) {
     ])
 
     await tasks.run()
-    console.log('%s Project ready', chalk.green.bold('DONE'))
+    console.log('%s Project ready', chalk.bgGreen.bold('DONE'))
     return true
 }
